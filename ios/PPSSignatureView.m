@@ -293,7 +293,6 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 	
 	UIImage *signatureImg;
 	UIImage *snapshot = [self snapshot];
-	[self erase];
 	
 	if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ) {
 		//signature
@@ -414,7 +413,6 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 		addVertex(&length, previousVertex);
 		
 		self.hasSignature = YES;
-		[self.manager publishDraggedEvent];
 		
 	} else if ([p state] == UIGestureRecognizerStateChanged) {
 		
@@ -460,6 +458,8 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 		
 		previousVertex = v;
 		addVertex(&length, previousVertex);
+        
+        	[self.manager publishDraggedEvent];
 	}
 	
 	[self setNeedsDisplay];
